@@ -1,0 +1,14 @@
+[user]
+	name = Andrey Lushnikov
+	email = aslushnikov@chromium.org
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+        hist = log --pretty=format:\"%h %ad | %s %Cblue%d%Creset [%an]\" --graph --date=short
+[core]
+	editor = vim -c \":normal gg\"
+        whitespace = trailing-space,space-before-tab
+[color]
+	ui = auto
