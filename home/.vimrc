@@ -18,6 +18,9 @@ inoremap <c-l> <c-^>
 " fast TTY repaint
 set ttyfast
 
+" remove 2 seconds timeout for escape key
+set ttimeout ttimeoutlen=0
+
 " setting up window title
 set title
 set titlestring=%F\ %m
