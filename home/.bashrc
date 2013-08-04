@@ -45,6 +45,7 @@ fi
 alias grep="grep --color=auto"
 alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
 alias ls="ls --color"
+alias tmux="TERM=screen-256color tmux"
 
 if [ "$(uname)" == "Darwin" ]; then
     # Setup for Mac OS X platform

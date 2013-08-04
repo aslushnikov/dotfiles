@@ -1,6 +1,15 @@
 " removing compatibility with Vi
 set nocompatible
 
+" we gonna use pathogen for plugin management
+execute pathogen#infect()
+
+" force vim to use 256 colors (might help in some cases)
+if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  set t_Co=256
+endif
+colorscheme distinguished
+
 " Remove any trailing whitespace that is in the file
 "autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
