@@ -37,7 +37,25 @@ export PS1='\u:\w$(open_bracket)\[$(tput setaf 2)\]$(pretty_branch)\[$(tput sgr0
 export PATH=$PATH:$HOME/bin
 export EDITOR="vim"
 
-alias grep="grep --color=auto"
-alias ls="ls --color"
-alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
+# Adding z.sh if any
+if [ -e $HOME/prog/z ]; then
+    . $HOME/prog/z/z.sh
+fi
 
+alias grep="grep --color=auto"
+alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
+alias ls="ls --color"
+
+if [ "$(uname)" == "Darwin" ]; then
+    # Setup for Mac OS X platform
+    # Add MacPorts bin paths
+    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+    export MANPATH=/opt/local/share/man:$MANPATH
+    alias ls="gls --color"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    # Setup for Linux platform
+    :
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+    # Setup for WinNT platform
+    :
+fi
