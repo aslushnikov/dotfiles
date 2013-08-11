@@ -39,6 +39,10 @@ function close_bracket {
         printf ")"
     fi
 }
+if [ -e ~/.git-completion ]; then
+    source ~/.git-completion
+fi
+
 # Show git branch in the terminal status line
 export PS1='\u:\w$(open_bracket)\[$(tput setaf 2)\]$(pretty_branch)\[$(tput sgr0)\]$(close_bracket)\$ '
 
