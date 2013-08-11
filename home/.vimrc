@@ -123,7 +123,7 @@ noremap k gk
 noremap j gj
 
 syntax on
-filetype plugin on
+filetype plugin indent on
 
 " Colors for complete options popup
 hi Pmenu      ctermfg=Cyan    ctermbg=Blue cterm=None guifg=Cyan guibg=DarkBlue
