@@ -53,6 +53,7 @@ alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
 alias ls="ls --color"
 alias tmux="TERM=screen-256color tmux"
 alias gg="git grep"
+alias tass="tmux attach-session -t"
 
 if [ "$(uname)" == "Darwin" ]; then
     # Setup for Mac OS X platform
