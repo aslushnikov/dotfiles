@@ -1,6 +1,6 @@
 [user]
 	name = Andrey Lushnikov
-	email = aslushnikov@chromium.org
+	email = lushnikov@chromium.org
 [alias]
 	st = status
 	ci = commit
