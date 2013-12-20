@@ -39,6 +39,10 @@ function close_bracket {
         printf ")"
     fi
 }
+if [ -e ~/.git-completion ]; then
+    source ~/.git-completion
+fi
+
 # Show git branch in the terminal status line
 export PS1='\u:\w$(open_bracket)\[$(tput setaf 2)\]$(pretty_branch)\[$(tput sgr0)\]$(close_bracket)\$ '
 
@@ -49,6 +53,7 @@ alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
 alias ls="ls --color"
 alias tmux="TERM=screen-256color tmux"
 alias gg="git grep"
+alias tass="tmux attach-session -t"
 
 if [ "$(uname)" == "Darwin" ]; then
     # Setup for Mac OS X platform
