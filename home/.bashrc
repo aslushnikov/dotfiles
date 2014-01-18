@@ -50,7 +50,7 @@ export EDITOR="vim"
 
 alias grep="grep --color=auto"
 alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
-alias ls="ls --color"
+alias ls="ls --color=auto"
 alias tmux="TERM=screen-256color tmux"
 alias gg="git grep"
 alias tass="tmux attach-session -t"
