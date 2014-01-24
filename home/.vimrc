@@ -47,11 +47,18 @@ set listchars=tab:<-,trail:~
 " until one is found.
 set tags=./.tags;/
 
+" 24Mb - max mem in kBytes to use for one buffer.
+set maxmem=24576
+
 " setup the max length of a line
 " set textwidth=80
 "
 " display current command in the bottom-right corner
 set showcmd
+
+" when splitting vertically, new window will be put on the right of the
+" current
+set splitright
 
 " always dislpay 20 lines before and after cursor if possible
 set scrolloff=20
