@@ -58,6 +58,7 @@ function c() {
 function r() {
     cd $HOME/chromium
     ./out/Release/chrome "$@"
+    cd -
 }
 
 alias ccd="cd $HOME/chromium"
@@ -125,6 +126,7 @@ function tt() {
 }
 
 alias wkt="$HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh"
+alias xwkt="xvfb-run --server-args='-screen 0 1600x1200x24+32' $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh --no-show-results"
 
 function gypi() {
     cd $HOME/chromium

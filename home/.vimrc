@@ -26,6 +26,8 @@ inoremap <c-l> <c-^>
 
 " fast TTY repaint
 set ttyfast
+" force vim to redraw instead of scroll
+set ttyscroll=0
 
 " remove 2 seconds timeout for escape key
 set ttimeout ttimeoutlen=0
@@ -123,6 +125,9 @@ noremap k gk
 noremap j gj
 
 syntax on
+" Force syntax highlight to get state from the very beginning of
+" the file
+autocmd BufEnter * :syntax sync fromstart
 filetype plugin on
 
 " Colors for complete options popup
