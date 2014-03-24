@@ -90,7 +90,7 @@ function wflow() {
 
     if [[ $1 == "r" ]]; then
         cd $HOME/devIde
-        ./out/Release/chrome --remote-debugging-port=9222 --user-data-dir="$HOME/dide/data" --profile-directory="$HOME/dide/profile" --remote-debugging-frontend="http://localhost:8090/front_end/inspector.html?experiments=true"
+        ./out/Release/chrome --remote-debugging-port=9222 --user-data-dir="$HOME/dide/data" --profile-directory="$HOME/dide/profile"
         return;
     fi
 
@@ -125,8 +125,21 @@ function tt() {
     cd -
 }
 
-alias wkt="$HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh"
-alias xwkt="xvfb-run --server-args='-screen 0 1600x1200x24+32' $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh --no-show-results"
+function wkt() {
+    bash $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh "$@"
+}
+
+function xwkt() {
+   xvfb-run --server-args='-screen 0 1600x1200x24+32' $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh --no-show-results "$@"
+}
+
+function ewkt() {
+    bash $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh --driver-logging "$@" 2>&1 | grep '^ERR:'
+}
+
+function exwkt() {
+    bash $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh --driver-logging "$@" 2>&1 | grep '^ERR:'
+}
 
 function gypi() {
     cd $HOME/chromium
