@@ -1,9 +1,13 @@
 " removing compatibility with Vi
 set nocompatible
 
+" make vim's shell to source bashrc
+set shell=bash\ --login
+
 " we gonna use pathogen for plugin management
 execute pathogen#infect()
 
+autocmd CursorMoved * exe printf('match StatusLineNC /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 " force vim to use 256 colors (might help in some cases)
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
@@ -25,9 +29,7 @@ set imsearch=-1
 inoremap <c-l> <c-^>
 
 " fast TTY repaint
-set ttyfast
-" force vim to redraw instead of scroll
-set ttyscroll=0
+" set ttyfast
 
 " remove 2 seconds timeout for escape key
 set ttimeout ttimeoutlen=0
