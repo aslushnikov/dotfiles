@@ -72,38 +72,43 @@ alias cpcm="cp $HOME/prog/CodeMirror/lib/codemirror.* $HOME/devtools/front_end/c
 
 function wflow() {
     if (( $# == 0 )); then
-        cd $HOME/devIde
+        cd $HOME/IDE
         return
     fi
+    local command=$1
+    shift;
 
-    if [[ $1 == "up" ]]; then
-        cd $HOME/devIde
+    if [[ $command == "up" ]]; then
+        cd $HOME/IDE
+        git pull origin master
         gclient sync
         return
     fi
 
-    if [[ $1 == "c" ]]; then
-        cd $HOME/devIde
+    if [[ $command == "c" ]]; then
+        cd $HOME/IDE
         PATH=/usr/local/google/home/lushnikov/goma:$PATH ninja -j 200 -C out/Release chrome
         return
     fi
 
-    if [[ $1 == "r" ]]; then
-        cd $HOME/devIde
-        ./out/Release/chrome --remote-debugging-port=9222 --user-data-dir="$HOME/dide/data" --profile-directory="$HOME/dide/profile"
+    if [[ $command == "r" ]]; then
+        cd $HOME/IDE
+        # create data directory if it does not exist
+        mkdir -p $HOME/ide-data/profile
+        ./out/Release/chrome --remote-debugging-port=9222 --user-data-dir="$HOME/ide-data" "$@"
         return;
     fi
 
-    if [[ $1 == "serve" ]]; then
+    if [[ $command == "serve" ]]; then
         cd $HOME/devtools
-        python -m SimpleHTTPServer 8090
+        static . -p 8090
         return;
     fi
 
-    if [[ $1 == "all" ]]; then
+    if [[ $command == "all" ]]; then
         wflow up
         wflow c
-        wflow r
+        wflow r "$@"
         return
     fi
 
@@ -145,4 +150,39 @@ function gypi() {
     cd $HOME/chromium
     ./build/gyp_chromium
     cd -
+}
+
+function testGitRepositoryClear() {
+    echo "Verifying clean state of $1"
+    cd $1
+    local branch=$(git rev-parse --abbrev-ref HEAD)
+    if [[ $branch != "master" ]]; then
+        echo "chromium checkout is not on MASTER branch"
+        return 1
+    fi
+    git diff --exit-code
+    if (( $? != 0 )); then
+        echo "chromium checkout is DIRTY"
+        return 1
+    fi
+    cd -
+    return 0;
+}
+
+function upd() {
+    local olddir=$(pwd -L)
+    echo "Updating chromium checkout"
+    testGitRepositoryClear $HOME/chromium
+    if (( $? != 0 )); then
+        return 1;
+    fi
+    testGitRepositoryClear $HOME/blink
+    if (( $? != 0 )); then
+        return 1;
+    fi
+    cd $HOME/chromium
+    git pull origin master
+    gclient sync
+    c
+    cd $olddir
 }
