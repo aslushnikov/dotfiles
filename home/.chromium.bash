@@ -57,7 +57,13 @@ function c() {
 
 function r() {
     cd $HOME/chromium
-    ./out/Release/chrome "$@"
+    if [ "$(uname)" == "Darwin" ]; then
+        # Setup for Mac OS X platform
+        # Add MacPorts bin paths
+        open ./out/Release/Chromium.app
+    else
+        ./out/Release/chrome "$@"
+    fi
     cd -
 }
 
