@@ -64,7 +64,7 @@ function r() {
 alias ccd="cd $HOME/chromium"
 alias ccw="cd $HOME/blink"
 alias cci="cd $HOME/devtools"
-alias landit="git cl dcommit"
+alias landit="git cl land"
 alias tte="tt editor/"
 alias cpcm="cp $HOME/prog/CodeMirror/lib/codemirror.* $HOME/devtools/front_end/cm/"
 
@@ -81,7 +81,10 @@ function wflow() {
     if [[ $command == "up" ]]; then
         cd $HOME/IDE
         git pull origin master
-        gclient sync
+        gclient sync --nohooks
+        cd $HOME/IDE/third_party/WebKit
+        git pull --rebase
+        $HOME/IDE/build/gyp_chromium
         return
     fi
 
@@ -120,30 +123,21 @@ serve - serve front end
 all - up + c + r"
 }
 
-function tt() {
-    cd $HOME/chromium
-    local path="inspector/"
-    if (( $# == 1 )); then
-        path="$path""$1"
-    fi
-    ./webkit/tools/layout_tests/run_webkit_tests.sh $path
-    cd -
-}
-
+export LAYOUT_TEST=$HOME/chromium/blink/tools/run_layout_tests.sh
 function wkt() {
-    bash $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh "$@"
+    bash $LAYOUT_TEST "$@"
 }
 
 function xwkt() {
-   xvfb-run --server-args='-screen 0 1600x1200x24+32' $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh --no-show-results "$@"
+   xvfb-run --server-args='-screen 0 1600x1200x24+32' $LAYOUT_TEST --no-show-results "$@"
 }
 
 function ewkt() {
-    bash $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh --driver-logging "$@" 2>&1 | grep '^ERR:'
+    bash $LAYOUT_TEST --driver-logging "$@" 2>&1 | grep '^ERR:'
 }
 
 function exwkt() {
-    bash $HOME/chromium/webkit/tools/layout_tests/run_webkit_tests.sh --driver-logging "$@" 2>&1 | grep '^ERR:'
+    bash $LAYOUT_TEST --driver-logging "$@" 2>&1 | grep '^ERR:'
 }
 
 function gypi() {
@@ -181,8 +175,46 @@ function upd() {
         return 1;
     fi
     cd $HOME/chromium
-    git pull origin master
-    gclient sync
+    git pull --rebase
+    gclient sync --nohooks
+    cd $HOME/blink
+    git pull --rebase
+    $HOME/chromium/build/gyp_chromium
     c
     cd $olddir
+}
+
+function roll() {
+    if (( $# == 0 )); then
+        echo "usage: $0 <file_name>
+
+This utility should be run from downstream CodeMirror version.
+Symlink $HOME/CodeMirror should point to upstream version.
+The method will search for <file_name> in CodeMirror upstream
+folder and, if a single instance was found, will copy it to local
+dir."
+        return 1;
+    fi
+    local fileName=$1
+    if ! [[ -e $fileName ]]; then
+        echo "File $fileName is not found in the current directory."
+        return 2;
+    fi
+
+    # goto upstream CodeMirror folder
+    cd $HOME/CodeMirror
+    local files=$(find . -name $fileName)
+    cd - &>/dev/null
+
+    local fileNumber=$(echo $files | wc -l)
+    if (( $fileNumber > 1 )); then
+        echo "Ambiguity for rolling instances
+$files"
+        return 3;
+    fi
+    if [[ -z $files ]]; then
+        echo "Could not find $fileName in upstream"
+        return 4;
+    fi
+    cp -v $HOME/CodeMirror/$files $fileName
 }
