@@ -5,6 +5,10 @@ alias aloha="cd /var/www"
 #export CC=clang
 #export CXX=clang++
 
+function wcanary {
+    open  /Applications/Google\ Chrome\ Canary.app/ --args --remote-debugging-port=9222 http://localhost:9222#http://localhost:8090/front_end/inspector.html aslushnikov.com "$@"
+}
+
 # Main checkout management
 function closure {
     cd $HOME/blink

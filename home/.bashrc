@@ -30,6 +30,15 @@ function pretty_branch {
     fi
 }
 
+function makenewmac {
+    echo "Old Mac: $(ifconfig en0 |grep ether)"
+    local newMac=$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//')
+    echo "I generated new: $newMac"
+    echo "Setting the new mac..."
+    sudo ifconfig en0 ether $newMac
+    echo "Please, verify the mac is updated: $(ifconfig en0 |grep ether)"
+}
+
 function close_bracket {
     branch=$(parse_git_branch)
     if [ -z "$branch" ]
