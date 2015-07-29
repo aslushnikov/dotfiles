@@ -70,7 +70,7 @@ function r() {
 alias ccd="cd $HOME/chromium"
 alias ccw="cd $HOME/blink"
 alias cci="cd $HOME/devtools"
-alias landit="git cl land"
+alias landit="git cl dcommit"
 alias tte="tt editor/"
 alias cpcm="cp $HOME/prog/CodeMirror/lib/codemirror.* $HOME/devtools/front_end/cm/"
 
@@ -110,7 +110,7 @@ function wflow() {
 
     if [[ $command == "serve" ]]; then
         cd $HOME/devtools
-        static . -p 8090
+        static . -p 8090 -H '{"Access-Control-Allow-Origin": "*","Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}'
         return;
     fi
 
