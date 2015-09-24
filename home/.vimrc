@@ -39,7 +39,7 @@ set title
 set titlestring=%F\ %m
 
 " allow backspace to delete all kind of characters
-set backspace+=start,eol,indent
+set backspace=start,eol,indent
 
 " display trailing spaces with "~" and tabs with "->"
 set list

@@ -12,3 +12,5 @@
         whitespace = trailing-space,space-before-tab
 [color]
 	ui = auto
+[http]
+	cookiefile = /usr/local/google/home/lushnikov/.gitcookies

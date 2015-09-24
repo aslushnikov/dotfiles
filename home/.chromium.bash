@@ -8,6 +8,10 @@ alias aloha="cd /var/www"
 #export CC=clang
 #export CXX=clang++
 
+function wcanary {
+    open  /Applications/Google\ Chrome\ Canary.app/ --args --remote-debugging-port=9222 http://localhost:9222#http://localhost:8090/front_end/inspector.html aslushnikov.com "$@"
+}
+
 # Main checkout management
 function closure {
     cd $HOME/blink
@@ -112,7 +116,7 @@ function wflow() {
 
     if [[ $command == "serve" ]]; then
         cd $HOME/devtools
-        static . -p 8090
+        static . -p 8090 -H '{"Access-Control-Allow-Origin": "*","Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}'
         return;
     fi
 
