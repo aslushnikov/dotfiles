@@ -15,7 +15,4 @@ if [ -e $HOME/prog/z/z.sh ]; then
 fi
 
 export N_PREFIX=$HOME
-if [ -e $HOME/depot_tools ]; then
-    PATH=$HOME/depot_tools:$PATH
-fi
 export PATH=$N_PREFIX/bin:$HOME/bin:$PATH

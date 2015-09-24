@@ -1,3 +1,6 @@
+if [ -e $HOME/depot_tools ]; then
+    PATH=$HOME/depot_tools:$PATH
+fi
 export GYP_GENERATORS="ninja"
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 alias aloha="cd /var/www"
@@ -70,9 +73,10 @@ function r() {
 alias ccd="cd $HOME/chromium"
 alias ccw="cd $HOME/blink"
 alias cci="cd $HOME/devtools"
-alias landit="git cl land"
+alias landit="git cl dcommit"
 alias tte="tt editor/"
 alias cpcm="cp $HOME/prog/CodeMirror/lib/codemirror.* $HOME/devtools/front_end/cm/"
+alias jsmin="python $HOME/blink/Source/build/scripts/rjsmin.py"
 
 # devTools IDE checkout management
 
@@ -88,8 +92,6 @@ function wflow() {
         cd $HOME/IDE
         git pull origin master
         gclient sync --nohooks
-        cd $HOME/IDE/third_party/WebKit
-        git pull --rebase
         $HOME/IDE/build/gyp_chromium
         return
     fi
@@ -176,15 +178,9 @@ function upd() {
     if (( $? != 0 )); then
         return 1;
     fi
-    testGitRepositoryClear $HOME/blink
-    if (( $? != 0 )); then
-        return 1;
-    fi
     cd $HOME/chromium
     git pull --rebase
     gclient sync --nohooks
-    cd $HOME/blink
-    git pull --rebase
     $HOME/chromium/build/gyp_chromium
     c
     cd $olddir
@@ -223,4 +219,14 @@ $files"
         return 4;
     fi
     cp -v $HOME/CodeMirror/$files $fileName
+}
+
+function mystats() {
+    local googleStartDate=`date -d "2012/10/22" +"%s"`
+    local today=`date +"%s"`
+    local gDays=$(echo "($today - $googleStartDate) / 86400" | bc)
+    echo "gDays: $gDays"
+    local patches=$(cd $HOME/chromium && git shortlog -s -n --author=lushnikov | cut -f1 | awk '{ sum += $1 } END { print sum }');
+    echo "  CLs: $patches"
+    echo "  lag: $(($patches - $gDays))"
 }
