@@ -13,4 +13,4 @@
 [color]
 	ui = auto
 [http]
-	cookiefile = /usr/local/google/home/lushnikov/.gitcookies
+	cookiefile = /Users/lushnikov/.gitcookies

@@ -1,3 +1,4 @@
+export GOMA_OAUTH2_CONFIG_FILE=$HOME/.goma_oauth2_config
 if [ -e $HOME/depot_tools ]; then
     PATH=$HOME/depot_tools:$PATH
 fi
@@ -9,7 +10,11 @@ alias aloha="cd /var/www"
 #export CXX=clang++
 
 function wcanary {
-    open  /Applications/Google\ Chrome\ Canary.app/ --args --remote-debugging-port=9222 http://localhost:9222#http://localhost:8090/front_end/inspector.html aslushnikov.com "$@"
+    open  /Applications/Google\ Chrome\ Canary.app/ --args --user-data-dir="/tmp/canary" --remote-debugging-port=9222 --enable-devtools-experiments --custom-devtools-frontend=http://localhost:8090/front_end/ "http://localhost:9222#custom=true&experiments=true" aslushnikov.com "$@"
+}
+
+function wbeta {
+    open  /Applications/Google\ Chrome\ Beta.app/ --args  --remote-debugging-port=9222 --enable-devtools-experiments --custom-devtools-frontend=http://localhost:8090/front_end/ "http://localhost:9222#custom=true&experiments=true" "$@"
 }
 
 # Main checkout management
@@ -67,7 +72,7 @@ function r() {
     if [ "$(uname)" == "Darwin" ]; then
         # Setup for Mac OS X platform
         # Add MacPorts bin paths
-        open ./out/Release/Chromium.app
+        open ./out/Release/Chromium.app --args "$@"
     else
         ./out/Release/chrome "$@"
     fi
