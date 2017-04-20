@@ -77,3 +77,5 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Setup for WinNT platform
     :
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -61,6 +61,7 @@ set showcmd
 " when splitting vertically, new window will be put on the right of the
 " current
 set splitright
+set splitbelow
 
 " always dislpay 20 lines before and after cursor if possible
 set scrolloff=20
@@ -125,6 +126,12 @@ imap <F4> <ESC>gti
 :cnoremap <Esc>f <S-Right>
 :cnoremap <Esc>d <S-right><Delete>
 :cnoremap <C-g>  <C-c>
+
+" Split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Rotate Color Scheme <F8>
 nnoremap <silent> <F8> :execute RotateColorTheme()<CR>
