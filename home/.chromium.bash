@@ -2,9 +2,7 @@ export GOMA_OAUTH2_CONFIG_FILE=$HOME/.goma_oauth2_config
 if [ -e $HOME/depot_tools ]; then
     PATH=$HOME/depot_tools:$PATH
 fi
-export GYP_GENERATORS="ninja"
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
-alias aloha="cd /var/www"
 #export PATH=$HOME/goma:$HOME/chromium/third_party/llvm-build/Release+Asserts/bin:$PATH
 #export CC=clang
 #export CXX=clang++
@@ -79,6 +77,10 @@ function r() {
     cd -
 }
 
+function rt() {
+    c blink_tests && wkt {http/tests/,}inspector*
+}
+
 alias ccd="cd $HOME/chromium"
 alias ccw="cd $HOME/blink"
 alias cci="cd $HOME/devtools"
@@ -100,8 +102,8 @@ function wflow() {
     if [[ $command == "up" ]]; then
         cd $HOME/IDE
         git pull origin master
-        gclient sync --nohooks
-        $HOME/IDE/build/gyp_chromium
+        gclient sync
+        gn gen out/Release
         return
     fi
 
@@ -115,7 +117,7 @@ function wflow() {
         cd $HOME/IDE
         # create data directory if it does not exist
         mkdir -p $HOME/ide-data/profile
-        ./out/Release/chrome --remote-debugging-port=9222 --user-data-dir="$HOME/ide-data" "$@"
+        ./out/Release/chrome --remote-debugging-port=9222 --user-data-dir="$HOME/ide-data" --custom-devtools-frontend="http://localhost:8090/front_end/" "$@"
         return;
     fi
 
@@ -140,13 +142,55 @@ serve - serve front end
 all - up + c + r"
 }
 
-export LAYOUT_TEST=$HOME/chromium/blink/tools/run_layout_tests.sh
+function catt() {
+    if (( $# == 0 )); then
+        echo "catt <command> <test>
+d - diff
+a - actual
+e - expected"
+        return
+    fi
+    if (( $# == 1 )); then
+        local command="d"
+        local test=$1;
+    elif (( $# == 2 )); then
+        local command=$1
+        local test=$2
+    fi
+
+    test=${test%.html}
+    local suffix="";
+    if [[ $command == "d" ]]; then
+        suffix="-diff.txt";
+    elif [[ $command == "a" ]]; then
+        suffix="-actual.txt";
+    elif [[ $command == "e" ]]; then
+        suffix="-expected.txt";
+    fi
+
+    cat $HOME/chromium/out/Release/layout-test-results/${test}${suffix}
+}
+
+function vimt() {
+    vim $HOME/blink/LayoutTests/$1
+}
+
+
+export LAYOUT_TEST="$HOME/chromium/blink/tools/run_layout_tests.sh --child-processes=7"
 function wkt() {
     bash $LAYOUT_TEST "$@"
 }
 
+function twkt() {
+    bash $LAYOUT_TEST --additional-drt-flag='--debug-devtools' --additional-drt-flag='--remote-debugging-port=9223' --time-out-ms=6000000 "$@"
+}
+
 function xwkt() {
    xvfb-run --server-args='-screen 0 1600x1200x24+32' $LAYOUT_TEST --no-show-results "$@"
+}
+
+function xtwkt() {
+   xvfb-run --server-args='-screen 0 1600x1200x24+32' $LAYOUT_TEST --no-show-results --additional-drt-flag='--remote-debugging-port=9223' --time-out-ms=6000000 "$@"
 }
 
 function ewkt() {
@@ -157,9 +201,9 @@ function exwkt() {
     bash $LAYOUT_TEST --driver-logging "$@" 2>&1 | grep '^ERR:'
 }
 
-function gypi() {
+function ggn {
     cd $HOME/chromium
-    ./build/gyp_chromium
+    gn gen out/Release
     cd -
 }
 
@@ -189,8 +233,8 @@ function upd() {
     fi
     cd $HOME/chromium
     git pull --rebase
-    gclient sync --nohooks
-    $HOME/chromium/build/gyp_chromium
+    gclient sync
+    ggn
     c
     cd $olddir
 }
