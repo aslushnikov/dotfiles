@@ -58,11 +58,9 @@ export PS1='\u:\w$(open_bracket)\[$(tput setaf 2)\]$(pretty_branch)\[$(tput sgr0
 export EDITOR="vim"
 
 alias grep="grep --color=auto"
-alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
 alias ls="ls --color=auto"
 alias tmux="TERM=screen-256color tmux"
 alias gg="git grep"
-alias tass="tmux attach-session -t"
 
 if [ "$(uname)" == "Darwin" ]; then
     # Setup for Mac OS X platform
@@ -78,4 +76,5 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     :
 fi
 
+# Fuzzy search: https://github.com/junegunn/fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

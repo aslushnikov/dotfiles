@@ -76,9 +76,9 @@ set scrolloff=20
 " insert apropriate amount of spaces when tab's hit
 set expandtab
 " number of spaces to use for each step of indent
-set shiftwidth=4
+set shiftwidth=2
 " amount of spaces to insert when one hits tab
-set softtabstop=4
+set softtabstop=2
 
 " search ignores case iff pattern is in a lower case
 set smartcase
