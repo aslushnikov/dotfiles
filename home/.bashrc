@@ -78,3 +78,5 @@ fi
 
 # Fuzzy search: https://github.com/junegunn/fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Git comlpetions: https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
+[ -f ~/git-completion.bash ] && source ~/git-completion.bash
