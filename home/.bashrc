@@ -58,7 +58,6 @@ export PS1='\u:\w$(open_bracket)\[$(tput setaf 2)\]$(pretty_branch)\[$(tput sgr0
 export EDITOR="vim"
 
 alias grep="grep --color=auto"
-alias ls="ls --color=auto"
 alias tmux="TERM=screen-256color tmux"
 alias gg="git grep"
 
@@ -67,10 +66,11 @@ if [ "$(uname)" == "Darwin" ]; then
     # Add MacPorts bin paths
     export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     export MANPATH=/opt/local/share/man:$MANPATH
-    alias ls="gls --color"
+    alias ls="exa"
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Setup for Linux platform
     alias xclip="xclip -selection c"
+    alias ls="ls --color=auto"
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Setup for WinNT platform
     :
@@ -78,5 +78,10 @@ fi
 
 # Fuzzy search: https://github.com/junegunn/fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Git comlpetions: https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
-[ -f ~/git-completion.bash ] && source ~/git-completion.bash
+if [ -f ~/git-completion.bash ]; then
+  source ~/git-completion.bash
+elif [ -f $(brew --prefix)/etc/bash_completion ]; then
+  source $(brew --prefix)/etc/bash_completion
+fi
