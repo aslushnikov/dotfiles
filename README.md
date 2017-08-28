@@ -6,3 +6,24 @@
 - [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) to see nice git diffs in terminal
 - [fzf](https://github.com/junegunn/fzf) for fuzzy-search files in terminal
 - [git bash completions](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash) so that bash would complete branchnames etc on Tab.
+
+# Fresh MacOS Setup
+
+- Add Russian input source, set `Cmd-Space` to switch input and `Alt-Space` to trigger Spotlight
+- Install [iTerm2](https://www.iterm2.com/)
+- Install command-line tools: `xcode-select --install`
+- Install [exa](https://the.exa.website/): `brew install exa`
+- Install [npm](https://www.npmjs.com/): `brew install npm`
+- Install [n](https://github.com/visionmedia/n): `npm install -g n`
+- Install [reattach-to-user-namespace](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard): ` brew install reattach-to-user-namespace`
+- Install [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): `brew install diff-so-fancy`
+- Install [fzf](https://github.com/junegunn/fzf): `brew install fzf`
+  - Install shell extensions: `/usr/local/opt/fzf/install`
+- Install [bash-completion](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash): `brew install bash-completion`
+- Generate SSH key and add it to github
+```sh
+# Generate key
+ssh-keygen -t rsa -b 4096 -C "the-github-email-address"
+# Copy key to paste later into the github
+pbcopy < ~/.ssh/id_rsa.pub
+```
