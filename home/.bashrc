@@ -80,8 +80,6 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Git comlpetions: https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
-if [ -f ~/git-completion.bash ]; then
-  source ~/git-completion.bash
-elif [ -f $(brew --prefix)/etc/bash_completion ]; then
-  source $(brew --prefix)/etc/bash_completion
-fi
+[ -f ~/git-completion.bash ] && source ~/git-completion.bash
+# Bash completions
+[ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
