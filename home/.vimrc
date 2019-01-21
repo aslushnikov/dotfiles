@@ -7,6 +7,7 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
+nnoremap <c-p> :FZF<cr>
 
 " make vim's shell to source bashrc
 set shell=bash\ --login
@@ -151,6 +152,7 @@ syntax on
 " Force syntax highlight to get state from the very beginning of
 " the file
 autocmd BufEnter * :syntax sync fromstart
+autocmd BufNewFile,BufRead *.jsm set syntax=javascript
 filetype plugin on
 
 " Colors for complete options popup
