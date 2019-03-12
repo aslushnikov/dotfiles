@@ -6,28 +6,18 @@ function ff {
     find . -iname "*$@*"
 }
 
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
-
-function open_bracket {
-    branch=$(parse_git_branch)
-    if [ -z "$branch" ]
-    then
-        printf ""
-    else
-        printf "("
+function git_branch {
+    # if not inside git repo - do nothing.
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+      printf ""
+      return
     fi
-}
-
-function pretty_branch {
-    branch=$(parse_git_branch)
-    if [ -z "$branch" ]
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    if [ "$branch" = "HEAD" ]
     then
-        printf ""
-    else
-        printf "$branch"
+      branch="HEAD detached at $(git rev-parse --short HEAD)"
     fi
+    printf "($(tput setaf 2)$branch$(tput sgr0))"
 }
 
 function makenewmac {
@@ -39,21 +29,12 @@ function makenewmac {
     echo "Please, verify the mac is updated: $(ifconfig en0 |grep ether)"
 }
 
-function close_bracket {
-    branch=$(parse_git_branch)
-    if [ -z "$branch" ]
-    then
-        printf ""
-    else
-        printf ")"
-    fi
-}
 if [ -e ~/.git-completion ]; then
     source ~/.git-completion
 fi
 
 # Show git branch in the terminal status line
-export PS1='\u:\w$(open_bracket)\[$(tput setaf 2)\]$(pretty_branch)\[$(tput sgr0)\]$(close_bracket)\$ '
+export PS1='\u:\w$(git_branch)$ '
 
 export EDITOR="vim"
 
