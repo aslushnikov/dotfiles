@@ -12,9 +12,6 @@ nnoremap <c-p> :FZF<cr>
 " make vim's shell to source bashrc
 set shell=bash\ --login
 
-" we gonna use pathogen for plugin management
-execute pathogen#infect()
-
 autocmd CursorMoved * exe printf('match StatusLineNC /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 " force vim to use 256 colors (might help in some cases)
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"

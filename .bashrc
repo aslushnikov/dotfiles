@@ -6,10 +6,12 @@ function ff {
     find . -iname "*$@*"
 }
 
-function git_branch {
+function set_command_prompt {
+    # Show git branch in the terminal status line
+    PS1='\u:\w$ '
+
     # if not inside git repo - do nothing.
     if ! git rev-parse --git-dir > /dev/null 2>&1; then
-      printf ""
       return
     fi
     branch=$(git rev-parse --abbrev-ref HEAD)
@@ -17,8 +19,10 @@ function git_branch {
     then
       branch="HEAD detached at $(git rev-parse --short HEAD)"
     fi
-    printf "($(tput setaf 2)$branch$(tput sgr0))"
+    PS1="\u:\w(\[$(tput setaf 2)\]$branch\[$(tput sgr0)\])$ "
 }
+
+PROMPT_COMMAND=set_command_prompt
 
 function makenewmac {
     echo "Old Mac: $(ifconfig en0 |grep ether)"
@@ -28,13 +32,6 @@ function makenewmac {
     sudo ifconfig en0 ether $newMac
     echo "Please, verify the mac is updated: $(ifconfig en0 |grep ether)"
 }
-
-if [ -e ~/.git-completion ]; then
-    source ~/.git-completion
-fi
-
-# Show git branch in the terminal status line
-export PS1='\u:\w$(git_branch)$ '
 
 export EDITOR="vim"
 
@@ -48,6 +45,8 @@ if [ "$(uname)" == "Darwin" ]; then
     export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     export MANPATH=/opt/local/share/man:$MANPATH
     alias ls="exa"
+    # Bash completions
+    [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Setup for Linux platform
     alias xclip="xclip -selection c"
@@ -62,5 +61,8 @@ fi
 
 # Git comlpetions: https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
 [ -f ~/git-completion.bash ] && source ~/git-completion.bash
-# Bash completions
-[ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
+
+if [ -e ~/.git-completion ]; then
+    source ~/.git-completion
+fi
+
