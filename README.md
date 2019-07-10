@@ -11,11 +11,14 @@
 
 - Add Russian input source, set `Cmd-Space` to switch input and `Alt-Space` to trigger Spotlight
 - Install [iTerm2](https://www.iterm2.com/)
+- Install [rustup](https://www.rust-lang.org/tools/install)
+- Install [rust](https://www.rust-lang.org/tools/install): `rustup toolchain install stable`
+- Install [brew](https://brew.sh/)
+- Install [nvm](https://github.com/nvm-sh/nvm)
+- Install [node](https://nodejs.org/en/): `nvm install stable`
 - Install command-line tools: `xcode-select --install`
 - Install [exa](https://the.exa.website/): `brew install exa`
-- Install [npm](https://www.npmjs.com/): `brew install npm`
-- Install [n](https://github.com/visionmedia/n): `npm install -g n`
-- Install [reattach-to-user-namespace](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard): ` brew install reattach-to-user-namespace`
+- Install [reattach-to-user-namespace](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard): `brew install reattach-to-user-namespace`
 - Install [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): `brew install diff-so-fancy`
 - Install [fzf](https://github.com/junegunn/fzf): `brew install fzf`
   - Install shell extensions: `/usr/local/opt/fzf/install`
