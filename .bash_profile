@@ -8,6 +8,7 @@ if [ -e $HOME/.hostspecific.bash ]; then
     source $HOME/.hostspecific.bash
 fi
 
-export N_PREFIX=$HOME
-export PATH=$N_PREFIX/bin:$HOME/bin:$PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
