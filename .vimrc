@@ -1,7 +1,7 @@
 " removing compatibility with Vi
 set nocompatible
 " If installed using git
-set rtp+=~/prog/fzf
+set rtp+=/usr/local/opt/fzf
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -150,6 +150,7 @@ syntax on
 " the file
 autocmd BufEnter * :syntax sync fromstart
 autocmd BufNewFile,BufRead *.jsm set syntax=javascript
+autocmd BufNewFile,BufRead *.ts  set syntax=typescript
 filetype plugin on
 
 " Colors for complete options popup
