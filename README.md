@@ -11,6 +11,7 @@
 - Install [iTerm2](https://www.iterm2.com/)
 - Install [rustup](https://www.rust-lang.org/tools/install)
 - Install [rust](https://www.rust-lang.org/tools/install): `rustup toolchain install stable`
+- Install [ripgrep](https://github.com/BurntSushi/ripgrep): `cargo install ripgrep`
 - Install [brew](https://brew.sh/)
 - Install [nvm](https://github.com/nvm-sh/nvm)
 - Install [node](https://nodejs.org/en/): `nvm install stable`
