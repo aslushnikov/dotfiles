@@ -1,7 +1,7 @@
 " removing compatibility with Vi
 set nocompatible
 " If installed using git
-set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',

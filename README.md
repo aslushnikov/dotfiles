@@ -18,9 +18,8 @@
 - Install command-line tools: `xcode-select --install`
 - Install [exa](https://the.exa.website/): `brew install exa`
 - Install [reattach-to-user-namespace](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard): `brew install reattach-to-user-namespace`
-- Install [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): `brew install diff-so-fancy`
-- Install [fzf](https://github.com/junegunn/fzf): `brew install fzf`
-  - Install shell extensions: `/usr/local/opt/fzf/install`
+- Install [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): (put diff-so-fancy script in the PATH and make it executable)
+- Install [fzf](https://github.com/junegunn/fzf): (install with .git so that it works with vim and bash)
 - Install [bash-completion](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash): `brew install bash-completion`
 - Generate SSH key and add it to github
 ```sh
