@@ -1,6 +1,5 @@
-export GOMA_OAUTH2_CONFIG_FILE=$HOME/.goma_oauth2_config
-if [ -e $HOME/depot_tools ]; then
-    PATH=$HOME/depot_tools:$PATH
+if [ -e $HOME/prog/depot_tools ]; then
+    PATH=$HOME/prog/depot_tools:$PATH
 fi
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 #export PATH=$HOME/goma:$HOME/chromium/third_party/llvm-build/Release+Asserts/bin:$PATH
@@ -13,13 +12,6 @@ function wcanary {
 
 function wbeta {
     open  /Applications/Google\ Chrome\ Beta.app/ --args  --remote-debugging-port=9223 --enable-devtools-experiments --custom-devtools-frontend=http://localhost:8090/front_end/ "http://localhost:9223#custom=true&experiments=true" "$@"
-}
-
-# Main checkout management
-function closure {
-    cd $HOME/devtools
-    python ./scripts/compile_frontend.py "$@"
-    cd -
 }
 
 function rgomoninja() {
@@ -50,10 +42,6 @@ function r() {
     cd -
 }
 
-function rt() {
-    c blink_tests && wkt {http/tests/,}inspector*
-}
-
 alias ccd="cd $HOME/chromium"
 alias ccw="cd $HOME/blink"
 alias cct="cd $HOME/layouttests/http/tests/devtools"
@@ -61,57 +49,6 @@ alias cci="cd $HOME/devtools"
 alias landit="git cl dcommit"
 
 # devTools IDE checkout management
-
-function wflow() {
-    if (( $# == 0 )); then
-        cd $HOME/IDE
-        return
-    fi
-    local command=$1
-    shift;
-
-    if [[ $command == "up" ]]; then
-        cd $HOME/IDE
-        git pull origin master
-        gclient sync
-        gn gen out/Release
-        return
-    fi
-
-    if [[ $command == "c" ]]; then
-        cd $HOME/IDE
-        PATH=/usr/local/google/home/lushnikov/goma:$PATH ninja -j 200 -C out/Release chrome
-        return
-    fi
-
-    if [[ $command == "r" ]]; then
-        cd $HOME/IDE
-        # create data directory if it does not exist
-        mkdir -p $HOME/ide-data/profile
-        ./out/Release/chrome --remote-debugging-port=9223 --user-data-dir="$HOME/ide-data" --custom-devtools-frontend="http://localhost:8090/front_end/" "$@"
-        return;
-    fi
-
-    if [[ $command == "serve" ]]; then
-        cd $HOME/devtools
-        static . -p 8090 -H '{"Access-Control-Allow-Origin": "*","Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"}'
-        return;
-    fi
-
-    if [[ $command == "all" ]]; then
-        wflow up
-        wflow c
-        wflow r "$@"
-        return
-    fi
-
-    echo "wflow <command>
-up - update sorces
-c - compile
-r - run
-serve - serve front end
-all - up + c + r"
-}
 
 function catt() {
     if (( $# == 0 )); then
@@ -141,11 +78,6 @@ e - expected"
 
     cat $HOME/chromium/out/Release/layout-test-results/${test}${suffix}
 }
-
-function vimt() {
-    vim $HOME/blink/LayoutTests/$1
-}
-
 
 export LAYOUT_TEST="$HOME/chromium/blink/tools/run_layout_tests.sh --child-processes=7"
 function wkt() {
@@ -208,41 +140,6 @@ function upd() {
     ggn
     c
     cd $olddir
-}
-
-function roll() {
-    if (( $# == 0 )); then
-        echo "usage: $0 <file_name>
-
-This utility should be run from downstream CodeMirror version.
-Symlink $HOME/CodeMirror should point to upstream version.
-The method will search for <file_name> in CodeMirror upstream
-folder and, if a single instance was found, will copy it to local
-dir."
-        return 1;
-    fi
-    local fileName=$1
-    if ! [[ -e $fileName ]]; then
-        echo "File $fileName is not found in the current directory."
-        return 2;
-    fi
-
-    # goto upstream CodeMirror folder
-    cd $HOME/CodeMirror
-    local files=$(find . -name $fileName)
-    cd - &>/dev/null
-
-    local fileNumber=$(echo $files | wc -l)
-    if (( $fileNumber > 1 )); then
-        echo "Ambiguity for rolling instances
-$files"
-        return 3;
-    fi
-    if [[ -z $files ]]; then
-        echo "Could not find $fileName in upstream"
-        return 4;
-    fi
-    cp -v $HOME/CodeMirror/$files $fileName
 }
 
 function mystats() {

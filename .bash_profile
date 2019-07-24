@@ -8,7 +8,7 @@ if [ -e $HOME/.hostspecific.bash ]; then
     source $HOME/.hostspecific.bash
 fi
 
-export PATH="$HOME/.cargo/bin:$HOME/prog/depot_tools/:$HOME/prog/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/prog/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
