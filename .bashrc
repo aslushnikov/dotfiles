@@ -14,10 +14,15 @@ function set_command_prompt {
     if ! git rev-parse --git-dir > /dev/null 2>&1; then
       return
     fi
-    branch=$(git rev-parse --abbrev-ref HEAD)
-    if [ "$branch" = "HEAD" ]
-    then
-      branch="HEAD detached at $(git rev-parse --short HEAD)"
+    branch=""
+    if ! git show-ref -q --verify HEAD; then
+      branch="no HEAD";
+    else
+      branch=$(git rev-parse --abbrev-ref HEAD)
+      if [ "$branch" = "HEAD" ]
+      then
+        branch="HEAD detached at $(git rev-parse --short HEAD)"
+      fi
     fi
     PS1="\u:\w(\[$(tput setaf 2)\]$branch\[$(tput sgr0)\])$ "
 }
