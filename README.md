@@ -21,6 +21,7 @@
 - Install [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): (put diff-so-fancy script in the PATH and make it executable)
 - Install [fzf](https://github.com/junegunn/fzf): (install with .git so that it works with vim and bash)
 - Install [bash-completion](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash): `brew install bash-completion`
+- Install [vim javascript syntax](https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim): `mkdir -p $HOME/.vim/syntax && curl https://raw.githubusercontent.com/pangloss/vim-javascript/master/syntax/javascript.vim -o $HOME/.vim/syntax/javascript.vim`
 - Generate SSH key and add it to github
 ```sh
 # Generate key
