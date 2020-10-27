@@ -2,10 +2,6 @@ function bupdate {
     source ~/.bash_profile
 }
 
-function ff {
-    find . -iname "*$@*"
-}
-
 function set_command_prompt {
     # Show git branch in the terminal status line
     PS1='\u:\w$ '
@@ -61,12 +57,15 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     :
 fi
 
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
 # Fuzzy search: https://github.com/junegunn/fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Git comlpetions: https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
 [ -f ~/.git-completion.bash ] && source ~/.git-completion.bash
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
