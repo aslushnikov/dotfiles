@@ -30,4 +30,4 @@ git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
 "$HOME/.fzf/install"
 
 # install bash completions
-wget --directory-prefix="$HOME" https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+wget --directory-prefix="$HOME" https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash && mv "${HOME}/git-completion.bash" "${HOME}/.git-completion.bash"
