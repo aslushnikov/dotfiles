@@ -48,10 +48,19 @@ if [ "$(uname)" == "Darwin" ]; then
     alias ls="exa"
     # Bash completions
     [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
+
+    export FF=/Users/aslushnikov/prog/playwright/browser_patches/firefox/checkout/obj-build-playwright/dist/Nightly.app/Contents/MacOS/firefox
+    export FFDBG=/Users/aslushnikov/prog/playwright/browser_patches/firefox/checkout/obj-build-playwright/dist/NightlyDebug.app/Contents/MacOS/firefox
+    export WK=/Users/aslushnikov/prog/playwright/browser_patches/webkit/pw_run.sh
+    export CR=/Users/aslushnikov/prog/playwright/browser_patches/chromium/output/chrome-mac/Chromium.app/Contents/MacOS/Chromium
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Setup for Linux platform
     alias xclip="xclip -selection c"
     alias ls="ls --color=auto"
+
+    export FF=/home/aslushnikov/prog/playwright/browser_patches/firefox/checkout/obj-build-playwright/dist/bin/firefox
+    export WK=/home/aslushnikov/prog/playwright/browser_patches/webkit/pw_run.sh
+    export CR=/home/aslushnikov/prog/playwright/browser_patches/chromium/output/chrome-linux/chrome
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Setup for WinNT platform
     :
@@ -70,3 +79,5 @@ shopt -s checkwinsize
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
