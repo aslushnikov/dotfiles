@@ -18,3 +18,7 @@
 	oldHighlight = red 52
 	newNormal = green
 	newHighlight = green 22
+[http]
+	cookiefile = /home/aslushnikov/.gitcookies
+[merge]
+	conflictstyle = diff3

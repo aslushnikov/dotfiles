@@ -76,6 +76,11 @@ shopt -s checkwinsize
 # Git comlpetions: https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
 [ -f ~/.git-completion.bash ] && source ~/.git-completion.bash
 
+# Chromium build tools
+if [[ -d "$HOME/prog/depot_tools" ]]; then
+  export PATH="$PATH:$HOME/prog/depot_tools"
+fi
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
