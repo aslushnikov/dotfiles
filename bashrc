@@ -43,7 +43,7 @@ alias gg="git grep"
 if [ "$(uname)" == "Darwin" ]; then
     # Setup for Mac OS X platform
     # Add MacPorts bin paths
-    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+    export PATH=/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:$HOME/bin:$PATH
     export MANPATH=/opt/local/share/man:$MANPATH
     alias ls="exa"
     # Bash completions
@@ -85,4 +85,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
+source "$HOME/.cargo/env"
