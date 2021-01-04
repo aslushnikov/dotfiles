@@ -41,7 +41,8 @@ alias tmux="TERM=screen-256color tmux"
 alias gg="git grep"
 
 if [ "$(uname)" == "Darwin" ]; then
-    # Setup for Mac OS X platform
+    # silence bash deprecation warning on Big Sur (11.0+)
+    export BASH_SILENCE_DEPRECATION_WARNING=1
     # Add MacPorts bin paths
     export PATH=/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:$HOME/bin:$PATH
     export MANPATH=/opt/local/share/man:$MANPATH
