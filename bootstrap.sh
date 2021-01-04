@@ -19,7 +19,7 @@ ln -s "$PWD/vimrc" "$HOME/.vimrc"
 
 # install vim colorscheme
 mkdir -p "$HOME/.vim/colors"
-if ! [[ -f "$HOME/.vim/color/distinguished.vim" ]]; then
+if ! [[ -f "$HOME/.vim/colors/distinguished.vim" ]]; then
   echo "-- Installing vim colorscheme: https://github.com/Lokaltog/vim-distinguished"
   wget --directory-prefix="$HOME/.vim/colors" https://raw.githubusercontent.com/Lokaltog/vim-distinguished/develop/colors/distinguished.vim
 fi
@@ -64,12 +64,14 @@ if ! command -v rustup >/dev/null; then
   source "$HOME/.bashrc"
 fi
 
-if ! command -v exa; then
+if ! command -v exa >/dev/null; then
   echo "-- installing exa: https://github.com/ogham/exa"
   cargo install exa
 fi
 
-if ! command -v rg; then
+if ! command -v rg >/dev/null; then
   echo "-- installing ripgrep: https://github.com/BurntSushi/ripgrep"
   cargo install ripgrep
 fi
+
+echo 'Done.'
