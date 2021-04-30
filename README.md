@@ -25,11 +25,12 @@
 - Install [fzf](https://github.com/junegunn/fzf): (install with .git so that it works with vim and bash)
 - Install [bash-completion](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash): `brew install bash-completion`
 - Install [vim javascript syntax](https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim): `mkdir -p $HOME/.vim/syntax && curl https://raw.githubusercontent.com/pangloss/vim-javascript/master/syntax/javascript.vim -o $HOME/.vim/syntax/javascript.vim`
+- Install [vim typescript syntax](https://github.com/leafgarland/typescript-vim): `git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/pack/typescript/start/typescript-vim`
 - Install [vim distinguished theme](https://github.com/Lokaltog/vim-distinguished): `mkdir -p $HOME/.vim/colors && curl https://raw.githubusercontent.com/Lokaltog/vim-distinguished/develop/colors/distinguished.vim -o $HOME/.vim/colors/distinguished.vim`
 - Generate SSH key and add it to github
-```sh
-# Generate key
-ssh-keygen -t rsa -b 4096 -C "the-github-email-address"
-# Copy key to paste later into the github
-pbcopy < ~/.ssh/id_rsa.pub
-```
+    ```sh
+    # Generate key
+    ssh-keygen -t rsa -b 4096 -C "the-github-email-address"
+    # Copy key to paste later into the github
+    pbcopy < ~/.ssh/id_rsa.pub
+    ```
