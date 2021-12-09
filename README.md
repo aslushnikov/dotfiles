@@ -34,3 +34,11 @@
     # Copy key to paste later into the github
     pbcopy < ~/.ssh/id_rsa.pub
     ```
+- Fix docker terminal history (https://stackoverflow.com/a/41820278/314883) via modifying `~/.docker/config.json`:
+    ```json
+    {
+        ...
+        "detachKeys": "ctrl-@",
+        ...
+    }
+    ```
