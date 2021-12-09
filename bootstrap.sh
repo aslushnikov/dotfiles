@@ -31,6 +31,12 @@ if ! [[ -d "$HOME/.vim/pack/typescript/start/typescript-vim" ]]; then
   git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/pack/typescript/start/typescript-vim
 fi
 
+# install rust vim highlight
+if ! [[ -f "$HOME/.vim/pack/plugins/start/rust.vim" ]]; then
+  echo "-- Installing rust vim support"
+  git clone https://github.com/rust-lang/rust.vim ~/.vim/pack/plugins/start/rust.vim
+fi
+
 # install diff-so-fancy
 mkdir -p "$HOME/prog"
 if ! [[ -d "$HOME/prog/diff-so-fancy" ]]; then
