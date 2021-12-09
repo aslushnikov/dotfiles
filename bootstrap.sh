@@ -9,12 +9,14 @@ cd "$(dirname "$0")"
 # Link all files to $HOME
 echo "-- Linking dotfiles to home directory"
 rm -rf "$HOME/.bashrc"
+rm -rf "$HOME/.bash_profile"
 rm -rf "$HOME/.tmux.conf"
 rm -rf "$HOME/.gitconfig"
 rm -rf "$HOME/.vimrc"
 ln -s "$PWD/gitconfig" "$HOME/.gitconfig"
 ln -s "$PWD/tmux.conf" "$HOME/.tmux.conf"
 ln -s "$PWD/bashrc" "$HOME/.bashrc"
+ln -s "$PWD/bash_profile" "$HOME/.bash_profile"
 ln -s "$PWD/vimrc" "$HOME/.vimrc"
 
 # install vim colorscheme
@@ -39,10 +41,11 @@ fi
 
 # install diff-so-fancy
 mkdir -p "$HOME/prog"
+mkdir -p "$HOME/prog/bin"
 if ! [[ -d "$HOME/prog/diff-so-fancy" ]]; then
   echo "-- Installing diff-so-fancy: https://github.com/so-fancy/diff-so-fancy"
   git clone https://github.com/so-fancy/diff-so-fancy "$HOME/prog/diff-so-fancy"
-  sudo ln -s "$HOME/prog/diff-so-fancy/diff-so-fancy" "$HOME/bin/diff-so-fancy"
+  sudo ln -s "$HOME/prog/diff-so-fancy/diff-so-fancy" "$HOME/prog/bin/diff-so-fancy"
 fi
 
 # install FZF

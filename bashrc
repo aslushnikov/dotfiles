@@ -62,4 +62,4 @@ fi
 
 # Load cargo
 source "$HOME/.cargo/env"
-export PATH="$HOME/.cargo/bin:$HOME/prog/bin:$PATH"
+export PATH="$HOME/prog/bin:$PATH"
