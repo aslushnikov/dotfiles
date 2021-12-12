@@ -146,6 +146,9 @@ noremap k gk
 noremap j gj
 
 syntax on
+" Speedup syntax highlight in VIM: https://www.chunkhang.com/blog/slow-syntax-highlighting-in-vim
+set re=1
+
 " Force syntax highlight to get state from the very beginning of
 " the file
 autocmd BufEnter * :syntax sync fromstart

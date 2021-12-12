@@ -22,3 +22,5 @@
 	cookiefile = /home/aslushnikov/.gitcookies
 [merge]
 	conflictstyle = diff3
+[pull]
+	rebase = true
