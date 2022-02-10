@@ -39,15 +39,6 @@ if ! [[ -f "$HOME/.vim/pack/plugins/start/rust.vim" ]]; then
   git clone https://github.com/rust-lang/rust.vim ~/.vim/pack/plugins/start/rust.vim
 fi
 
-# install diff-so-fancy
-mkdir -p "$HOME/prog"
-mkdir -p "$HOME/prog/bin"
-if ! [[ -d "$HOME/prog/diff-so-fancy" ]]; then
-  echo "-- Installing diff-so-fancy: https://github.com/so-fancy/diff-so-fancy"
-  git clone https://github.com/so-fancy/diff-so-fancy "$HOME/prog/diff-so-fancy"
-  sudo ln -s "$HOME/prog/diff-so-fancy/diff-so-fancy" "$HOME/prog/bin/diff-so-fancy"
-fi
-
 # install FZF
 if ! [[ -d "$HOME/.fzf" ]]; then
   echo "-- Installing FZF: https://github.com/junegunn/fzf"
@@ -76,6 +67,16 @@ fi
 if ! command -v exa >/dev/null; then
   echo "-- installing exa: https://github.com/ogham/exa"
   cargo install exa
+fi
+
+if ! command -v bat >/dev/null; then
+  echo "-- installing bat: https://github.com/sharkdp/bat"
+  cargo install bat
+fi
+
+if ! command -v delta >/dev/null; then
+  echo "-- installing git-delta: https://github.com/dandavison/delta"
+  cargo install git-delta
 fi
 
 if ! command -v rg >/dev/null; then
