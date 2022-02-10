@@ -10,17 +10,27 @@
 [core]
 	editor = vim -c \":normal gg\"
         whitespace = trailing-space,space-before-tab
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+[delta]
+	max-line-length = 700
+        line-numbers = true
+	syntax-theme = Monokai Extreme
+	hyperlinks = false # TMUX doesn't render hyperlinks: https://github.com/tmux/tmux/issues/911
+	file-style = bold yellow ul
+	file-decoration-style = yellow ol ul
+	hunk-header-decoration-style = blue
+	hunk-header-line-number-style = purple bold
 [color]
 	ui = auto
-[color "diff-highlight"]
-	oldNormal = red 
-	oldHighlight = red 52
-	newNormal = green
-	newHighlight = green 22
 [http]
 	cookiefile = /home/aslushnikov/.gitcookies
 [merge]
 	conflictstyle = diff3
 [pull]
 	rebase = true
+[diff]
+	# Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
+	# https://blog.github.com/2018-04-05-git-217-released/
+	colorMoved = default
