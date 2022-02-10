@@ -9,6 +9,9 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 nnoremap <c-p> :FZF<cr>
 
+# https://github.com/vim/vim/issues/2049
+set mmp=5000
+
 " make vim's shell to source bashrc
 set shell=bash\ --login
 
