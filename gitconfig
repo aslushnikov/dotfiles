@@ -6,6 +6,7 @@
 	ci = commit
 	co = checkout
 	br = branch
+        cp = cherry-pick
         hist = log --pretty=format:\"%h %ad | %s %Cblue%d%Creset [%an]\" --graph --date=short
 [core]
 	editor = vim -c \":normal gg\"
@@ -34,3 +35,5 @@
 	# Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
 	# https://blog.github.com/2018-04-05-git-217-released/
 	colorMoved = default
+[init]
+	defaultBranch = main

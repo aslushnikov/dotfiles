@@ -36,13 +36,13 @@ shopt -s checkwinsize
 
 # Fuzzy search: https://github.com/junegunn/fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
 
 # Git Bash completions: https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
 [ -f ~/.git-completion.bash ] && source ~/.git-completion.bash
-# Load NVM and NVM bash completions
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     # silence bash deprecation warning on Big Sur (11.0+)
@@ -63,3 +63,8 @@ fi
 # Load cargo
 source "$HOME/.cargo/env"
 export PATH="$HOME/prog/bin:$PATH"
+
+# Load NVM and NVM bash completions
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
