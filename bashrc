@@ -55,9 +55,16 @@ if [[ "$(uname)" == "Darwin" ]]; then
     export WK=/Users/aslushnikov/prog/playwright/browser_patches/webkit/pw_run.sh
     export CR=/Volumes/Progged/chromium/output/chrome-mac/Chromium.app/Contents/MacOS/Chromium
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    export FF=/home/aslushnikov/prog/playwright/browser_patches/firefox/checkout/obj-build-playwright/dist/bin/firefox
-    export WK=/home/aslushnikov/prog/playwright/browser_patches/webkit/pw_run.sh
-    export CR=/home/aslushnikov/prog/playwright/browser_patches/chromium/output/chrome-linux/chrome
+    # Setup for Linux platform
+    alias xclip="xclip -selection c"
+    alias ls="ls --color=auto"
+
+    export FF=/home/aslushnikov/firefox/obj-build-playwright/dist/bin/firefox
+    export WK=/home/aslushnikov/webkit/pw_run.sh
+    export CR=/home/aslushnikov/chromium/output/chrome-linux/chrome
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+    # Setup for WinNT platform
+    :
 fi
 
 # Load cargo

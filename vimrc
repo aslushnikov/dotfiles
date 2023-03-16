@@ -157,6 +157,7 @@ set re=1
 autocmd BufEnter * :syntax sync fromstart
 autocmd BufNewFile,BufRead *.jsm set syntax=javascript
 autocmd BufNewFile,BufRead *.ts  set syntax=typescript
+autocmd BufNewFile,BufRead *.dockerfile  set syntax=dockerfile
 filetype plugin on
 
 " Colors for complete options popup
