@@ -34,7 +34,7 @@ if ! [[ -d "$HOME/.vim/pack/typescript/start/typescript-vim" ]]; then
 fi
 
 # install rust vim highlight
-if ! [[ -f "$HOME/.vim/pack/plugins/start/rust.vim" ]]; then
+if ! [[ -d "$HOME/.vim/pack/plugins/start/rust.vim" ]]; then
   echo "-- Installing rust vim support"
   git clone https://github.com/rust-lang/rust.vim ~/.vim/pack/plugins/start/rust.vim
 fi
