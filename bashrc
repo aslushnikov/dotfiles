@@ -51,9 +51,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
     [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
 
-    export FF=/Volumes/Progged/firefox/obj-build-playwright/dist/Nightly.app/Contents/MacOS/firefox
-    export WK=/Users/aslushnikov/prog/playwright/browser_patches/webkit/pw_run.sh
-    export CR=/Volumes/Progged/chromium/output/chrome-mac/Chromium.app/Contents/MacOS/Chromium
+    export FF=/Users/andreylushnikov/firefox/obj-build-playwright/dist/Nightly.app/Contents/MacOS/firefox
+    export FFPKG=/tmp/repackaged-firefox/firefox/Nightly.app/Contents/MacOS/firefox
+    export WK=/Users/andreylushnikov/prog/playwright/browser_patches/webkit/pw_run.sh
+    export CR=/Users/andreylushnikov/chromium/output/chrome-mac/Chromium.app/Contents/MacOS/Chromium
+    # export CR_CHECKOUT_PATH=/Volumes/Progged/chromium
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Setup for Linux platform
     alias xclip="xclip -selection c"
