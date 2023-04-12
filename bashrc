@@ -2,6 +2,25 @@ function bupdate {
     source ~/.bash_profile
 }
 
+function analyze_stacktrace() {
+  local file_path="$1"
+  shift
+
+  if [ -z "$file_path" ] || [ -z "$1" ]; then
+    echo "Usage: analyze_stacktrace <file_path> <addr1> <addr2> ..."
+    return 1
+  fi
+
+  if [ ! -f "$file_path" ]; then
+    echo "File not found: $file_path"
+    return 1
+  fi
+
+  for addr in "$@"; do
+    addr2line -e "$file_path" -f -i -C -p "$addr"
+  done
+}
+
 function set_command_prompt {
     # Show git branch in the terminal status line
     PS1='aslushnikov:\w$ '
