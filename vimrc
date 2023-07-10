@@ -9,6 +9,16 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 nnoremap <c-p> :FZF<cr>
 
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_keymap.topen = ['<C-t>']
+
+augroup quickfix
+    autocmd!
+    autocmd FileType qf setlocal nowrap
+augroup END
+
 " https://github.com/vim/vim/issues/2049
 set mmp=5000
 
@@ -37,7 +47,7 @@ set imsearch=-1
 inoremap <c-l> <c-^>
 
 " fast TTY repaint
-" set ttyfast
+set ttyfast
 
 " remove 2 seconds timeout for escape key
 set ttimeout ttimeoutlen=0
