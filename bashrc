@@ -48,6 +48,8 @@ export EDITOR="vim"
 
 alias tmux="TERM=screen-256color tmux"
 alias ls="exa"
+alias yt-dl='docker run --rm -i -e PGID=$(id -g) -e PUID=$(id -u) -v "$(pwd)":/workdir:rw mikenye/youtube-dl'
+alias get-mp3='yt-dl --extract-audio --audio-format mp3'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
