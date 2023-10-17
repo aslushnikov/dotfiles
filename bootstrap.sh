@@ -64,9 +64,9 @@ if ! command -v rustup >/dev/null; then
   source "$HOME/.bashrc"
 fi
 
-if ! command -v exa >/dev/null; then
-  echo "-- installing exa: https://github.com/ogham/exa"
-  cargo install exa
+if ! command -v eza >/dev/null; then
+  echo "-- installing eza: https://github.com/eza-community/eza"
+  cargo install eza
 fi
 
 if ! command -v bat >/dev/null; then

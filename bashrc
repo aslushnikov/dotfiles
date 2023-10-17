@@ -47,7 +47,7 @@ PROMPT_COMMAND=set_command_prompt
 export EDITOR="vim"
 
 alias tmux="TERM=screen-256color tmux"
-alias ls="exa"
+alias ls="eza"
 alias yt-dl='docker run --rm -i -e PGID=$(id -g) -e PUID=$(id -u) -v "$(pwd)":/workdir:rw mikenye/youtube-dl'
 alias get-mp3='yt-dl --extract-audio --audio-format mp3'
 
@@ -98,3 +98,4 @@ export PATH="$HOME/prog/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+. "$HOME/.cargo/env"

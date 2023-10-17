@@ -17,7 +17,7 @@
 [delta]
 	max-line-length = 700
         line-numbers = true
-	syntax-theme = Monokai Extreme
+	syntax-theme = Monokai Extended
 	hyperlinks = false # TMUX doesn't render hyperlinks: https://github.com/tmux/tmux/issues/911
 	file-style = bold yellow ul
 	file-decoration-style = yellow ol ul
