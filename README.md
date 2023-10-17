@@ -10,6 +10,7 @@
 
 # Fresh MacOS Setup
 
+- (since MacOS Sonoma): if you need to disable input language switch, see here: https://stackoverflow.com/a/77256214
 - Add Russian input source, set `Cmd-Space` to switch input and `Alt-Space` to trigger Spotlight
 - Install [iTerm2](https://www.iterm2.com/)
 - Install [rustup](https://www.rust-lang.org/tools/install)
